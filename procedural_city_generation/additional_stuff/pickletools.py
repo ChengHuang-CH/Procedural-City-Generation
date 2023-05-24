@@ -38,6 +38,10 @@ def save_vertexlist(vertex_list, name="output", savefig=0):
                          color=col,
                          linewidth=width)
 
+        if not os.path.isdir(path + "/outputs/"):
+            os.mkdir(path + "/outputs/")
+            print(f'create folder: {path + "/outputs/"}')
+
         plt.savefig(path+"/outputs/"+name+".png")
     else:
         print("Figure is not being saved as image, if you want to save it, change savefig option in conf.txt")
