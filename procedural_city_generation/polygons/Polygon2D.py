@@ -2,28 +2,32 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def is_convex(self):
     for (edge1, edge2) in zip(self.edges, self.edges[1:] + [self.edges[0]]):
         v = edge2.dir_vector - edge1.dir_vector
         angle = np.arctan2(v[1], v[0])
-        if angle >= np.pi or (angle < 0 and angle + 2*np.pi >= np.pi):
+        if angle >= np.pi or (angle < 0 and angle + 2 * np.pi >= np.pi):
             return False
     return True
 
+
 def area(self):
     """Return area of polygon"""
-    return 0.5 * abs(sum(edge[0][0]*edge[1][1] - edge[1][0]*edge[0][1]
-            for edge in self.edges))
+    return 0.5 * abs(sum(edge[0][0] * edge[1][1] - edge[1][0] * edge[0][1]
+                         for edge in self.edges))
+
 
 class Edge(object):
 
-    def __init__(self, vertex1, vertex2, bordering_road = True):
+    def __init__(self, vertex1, vertex2, bordering_road=True):
         """Input vertices are numpy-arrays"""
         self.bordering_road = bordering_road
         self.vertices = np.array((vertex1, vertex2))
         self.dir_vector = vertex2 - vertex1
         self.length = np.linalg.norm(self.dir_vector)
-        v = self.dir_vector/self.length
+        # print(f'self.dir_vector: {self.dir_vector}; self.length: {self.length}')
+        v = self.dir_vector / self.length
         self.n = np.array((v[1], -v[0]))
 
     def __getitem__(self, i):
@@ -34,6 +38,7 @@ class Edge(object):
 
     def selfplot(self, color="k", plt=None):
         plt.plot((self[0][0], self[1][0]), (self[0][1], self[1][1]), color=color)
+
 
 class Polygon2D(object):
 
@@ -46,7 +51,7 @@ class Polygon2D(object):
         else:
             self.vertices = in_list
             self.edges = [Edge(v1, v2) for v1, v2 in
-                            zip(in_list, in_list[1:]+[in_list[0]])]
+                          zip(in_list, in_list[1:] + [in_list[0]])]
         self.is_convex = is_convex(self)
         self.area = area(self)
         self.poly_type = poly_type
@@ -59,17 +64,14 @@ class Polygon2D(object):
         return s
 
     def selfplot(self, plt=plt):
-            color="r"
-            t=self.poly_type
-            if t == "lot" or t == "block":
-                color="g"
-            elif t == "road":
-                color="k"
-            composite=np.array([edge.vertices[0] for edge in self.edges]+[self.edges[0].vertices[0]])
-            plt.plot(composite[:, 0], composite[:, 1], color=color)
-
-
-
+        color = "r"
+        t = self.poly_type
+        if t == "lot" or t == "block":
+            color = "g"
+        elif t == "road":
+            color = "k"
+        composite = np.array([edge.vertices[0] for edge in self.edges] + [self.edges[0].vertices[0]])
+        plt.plot(composite[:, 0], composite[:, 1], color=color)
 
 
 if __name__ == "__main__":
