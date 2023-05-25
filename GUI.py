@@ -1,3 +1,5 @@
+import glob
+
 import matplotlib
 
 matplotlib.use("QT5Agg")
@@ -234,9 +236,14 @@ class GUI(QtWidgets.QMainWindow):
         print("removing all .pyc files")
         clean_pyc_files(os.getcwd())
         print("removing all items in /procedural_city_generation/temp/ directory")
-        os.system("rm -f " + os.getcwd() + "/procedural_city_generation/temp/*")
+        # os.system("rm -f " + os.getcwd() + "/procedural_city_generation/temp/*")
+        for f in glob.glob(os.getcwd() + "/procedural_city_generation/temp/*"):
+            print(f)
+            os.remove(f)
         print("removing all items in /procedural_city_generation/outputs/ directory")
-        os.system("rm -f " + os.getcwd() + "/procedural_city_generation/outputs/*")
+        # os.system("rm -f " + os.getcwd() + "/procedural_city_generation/outputs/*")
+        for f in glob.glob(os.getcwd() + "/procedural_city_generation/outputs/*"):
+            os.remove(f)
         print(UI.donemessage)
 
     def set_xlim(self, tpl):
