@@ -9,8 +9,8 @@ def main():
     img=mpimg.imread('./rawface.jpg')
     img2=np.ndarray(img.shape)
 
-    for x in xrange(img.shape[0]):
-        for y in xrange(img.shape[1]):#
+    for x in range(img.shape[0]):
+        for y in range(img.shape[1]):#
             val=img[x][y]
 
             biggestval=np.argmax(val)

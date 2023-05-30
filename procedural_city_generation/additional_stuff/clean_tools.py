@@ -102,6 +102,6 @@ def find_imports(path):
     for imp in all_imports:
         imp = imp.split(" as ")[0]
         imp = imp.replace("import", "").replace("from", "").replace("\t", "").replace("\n", "").replace("\r", "")
-        imp = ".".join([x for x in imp.split(" ") if x is not ""])
+        imp = ".".join([x for x in imp.split(" ") if x != ""])
         new_all_imports.add(imp)
     print(new_all_imports)
