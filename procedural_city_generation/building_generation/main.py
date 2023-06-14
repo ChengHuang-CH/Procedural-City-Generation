@@ -62,6 +62,7 @@ def submain():
             center = sum(poly.vertices) / len(poly.vertices)
             buildingheight = gb.getBuildingHeight(center)
 
+
             floortexture = texGetter.getTexture('Floor', buildingheight)
             windowtexture = texGetter.getTexture('Window', buildingheight)
             walltexture = texGetter.getTexture('Wall', buildingheight)
@@ -82,6 +83,9 @@ def submain():
                                                windowwidth + singleton.windowdist_max_not_house)
 
             base_h_low, base_h_high = surface.getSurfaceHeight(poly.vertices)
+
+            print(f'center: {center}, buildingheight: {buildingheight}, floorheight: {floorheight}'
+                  f'base_h_low: {base_h_low}, base_h_high:{base_h_high}')
 
             # TODO: Fix after lennys fix,
             # Scales and Translates floor
@@ -155,9 +159,9 @@ def submain():
 
                     polygons.append(buildwalls(walls, base_h_low, currentheight, walltexture))
 
-            polygons.append(
-                get_windows(windows, list_of_currentheights, floorheight, windowwidth, windowheight, windowdist,
-                            windowtexture))
+            # polygons.append(
+            #     get_windows(windows, list_of_currentheights, floorheight, windowwidth, windowheight, windowdist,
+            #                 windowtexture))
         else:
             print("Polygon3D.poly_type not understood")
         if singleton.plotbool:

@@ -45,6 +45,12 @@ class Wavefront(object):
         return 0
 
 if __name__ == '__main__':
+    import sys
+    import os
+
+    parentpath = os.path.join(os.getcwd(), ("../../"))
+    sys.path.append(parentpath)
+
     import procedural_city_generation
     from procedural_city_generation.building_generation.Polygon3D import Polygon3D
     import numpy as np
